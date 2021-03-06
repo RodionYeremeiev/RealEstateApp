@@ -31,10 +31,14 @@ class ApartmentRaterTest {
     @Test
     void should_ReturnErrorValue_When_IncorrectApartment(){
         // given
+        Apartment apartment = new Apartment(0, BigDecimal.valueOf(35000.0));
+        int expected = -1;
 
         // when
+        int actual = ApartmentRater.rateApartment(apartment);
 
         // then
+        assertEquals(expected, actual);
 
     }
     @Test
