@@ -1,18 +1,30 @@
 package com.realestateapp;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+
+import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ApartmentRaterTest {
 
-    @Test
-    void should_ReturnCorrectRating_When_CorrectApartment(){
+    @ParameterizedTest
+    @CsvFileSource(
+            resources = "/ApartmentParameters.csv",
+            numLinesToSkip = 1
+    )
+    void should_ReturnCorrectRating_When_CorrectApartment(double area, double price, int rating){
         // given
+        Apartment apartment = new Apartment(area, BigDecimal.valueOf(price));
+        int expected = rating;
 
         // when
+        int actual = ApartmentRater.rateApartment(apartment);
 
         // then
+        assertEquals(expected, actual);
 
     }
 
